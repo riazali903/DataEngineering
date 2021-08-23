@@ -1,58 +1,40 @@
 import json
-import time
 
-with open('record.json') as f:
-    students = json.load(f)
 
+def from_json():
+    with open('record.json') as f:
+        return json.load(f)
+
+students = from_json()
+
+
+def to_json():
+    with open('record.json', 'w') as f:
+        json.dump(students, f, indent=4)
+
+
+#students.sort(key= lambda k : k['Searches'])
 while True:
-    contains = False
-    search = int(input('enter your search'))
+    contain = False
+    search = input('enter your search')
     students.sort(key=lambda k: k['Searches'], reverse=True)
 
-
     for student in students:
+        if student['Name'] == search:
+            sCount = student['Searches']
+            students.remove(student)
+            contain = True
+            update_item = { "Name": search,"Searches": sCount + 1}
+            students.append(update_item)
 
-        if student['ID'] == search:
-            student['Searches'] += 1
-            contains = True
-            with open('record.json', 'w') as f:
-                json.dump(students, f, indent=4)
-
-    if contains is False:
-        student['ID'] != search
+    if contain is False:
         print('not found, add new')
-        del students[-1]
-        dict = {}
-        dict['ID'] = int(input('enter id : '))
-        dict['Name'] = input('enter name : ')
-        dict['Searches'] = 0
-        students.append(dict)
-        with open('record.json', 'w') as f:
-            json.dump(students, f, indent=4)
+        update_item = {'Name':search,'Searches':0}
+        students.append(update_item)
+    to_json()
 
 
 
 
 
-# for a in students:
-#     min(a['Searches'])
-# def find(id):
-#     return user['id']
-#
-# search= input('enter your search')
-#
-#
-# for student in students:
-#     if student['ID']== search:
-#         student['Searches'] +=1
 
-    # if search in student:
-    #     student["Searches"] += 1
-    # else:
-    #     print("not found")
-
-
-# for i in student:
-#     if search == i:
-#         student["searches"] += 1
-#     time.sleep(5)
