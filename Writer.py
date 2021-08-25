@@ -2,25 +2,48 @@
 import json
 from threading import Thread
 import time
-
+#import Reader
 
 students = []
+
+def write_to_file():
+    with open('record.json', 'w') as f:
+        json.dump(students, f, indent=4)
+
+
 #students.sort(key=lambda k: k['Searches'])
-size = (len(students))
+#size = (len(students))
 size= int(input("plese enter dict size : "))
 
+print(students)
 
 
-for student in range(size):
-    if len(students) <= size:
+while True:
+    if len(students) < size:
         student = {}
         #student['ID'] = int(input('enter id : '))
         student['Name'] = input('enter name : ')
         student['Searches'] = int()
         students.append(student)
-        size +=1
-        with open('rooo.json', 'w') as f:
-            json.dump(students, f,indent=4)
+        #print(students)
+    else:
+        print('list full, add new ?')
+        print(students)
+        student['Name'] = input('enter new name : ')
+        students.remove(student)
+        students.append(student)
+        print(students)
+        #students.append(update_item)
+    write_to_file()
+
+
+
+
+
+
+# with open('record.json', 'w') as f:
+#     json.dump(students, f, indent=4)
+
 
 # else:
 #     while True:
