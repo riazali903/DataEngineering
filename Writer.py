@@ -13,9 +13,8 @@ def write_to_file():
 
 #students.sort(key=lambda k: k['Searches'])
 #size = (len(students))
-size= int(input("plese enter dict size : "))
 
-print(students)
+size= int(input("plese enter dict size : "))
 
 
 while True:
@@ -25,19 +24,20 @@ while True:
         student['Name'] = input('enter name : ')
         student['Searches'] = int()
         students.append(student)
-        #print(students)
+        print(students)
+
     else:
-        print('list full, add new ?')
-        print(students)
-        student['Name'] = input('enter new name : ')
-        students.remove(student)
-        students.append(student)
-        print(students)
-        #students.append(update_item)
+        new =input('list full,add new ?')
+        if new == 'yes':
+            student['Name'] = input('enter new name : ')
+            students.remove(student)
+            students.append(student)
+            print('new appneded:',students)
+
+        # break
+        else:
+            break
     write_to_file()
-
-
-
 
 
 
