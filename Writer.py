@@ -2,9 +2,10 @@
 import json
 from threading import Thread
 import time
-#import Reader
+
 
 students = []
+
 
 def write_to_file():
     with open('record.json', 'w') as f:
@@ -14,30 +15,34 @@ def write_to_file():
 #students.sort(key=lambda k: k['Searches'])
 #size = (len(students))
 
-size= int(input("plese enter dict size : "))
+def main_writer():
+    size= int(input("plese enter dict size : "))
 
-
-while True:
-    if len(students) < size:
-        student = {}
-        #student['ID'] = int(input('enter id : '))
-        student['Name'] = input('enter name : ')
-        student['Searches'] = int()
-        students.append(student)
-        print(students)
-
-    else:
-        new =input('list full,add new ?')
-        if new == 'yes':
-            student['Name'] = input('enter new name : ')
-            students.remove(student)
+    while True:
+        if len(students) < size:
+            student = {}
+            #student['ID'] = int(input('enter id : '))
+            student['Name'] = input('enter name : ')
+            student['Searches'] = int()
             students.append(student)
-            print('new appneded:',students)
+            print(students)
 
-        # break
         else:
-            break
-    write_to_file()
+            new =input('list full,add new, enter yes or no ?')
+            if new == 'yes':
+                student['Name'] = input('enter new name : ')
+                students.remove(student)
+                students.append(student)
+                print('new appended:',students)
+
+            # break
+            else:
+                break
+        write_to_file()
+
+main_writer()
+
+
 
 
 
