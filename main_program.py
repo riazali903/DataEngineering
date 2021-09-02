@@ -4,24 +4,9 @@ import time
 
 import Writer
 import Reader
-# import queue
-
-# que = queue.Queue
-# lock = threading.Lock()
-# def write(lock):
-#     lock.acquire()
-#     main_writer()
-#     find()
-#     lock.release()
-#
-# def read(lock):
-#     lock.acquire()
-#     find()
-#     lock.release()
 
 
-
-print('This is main body')
+print('This is main thread')
 
 Writer.main_writer()
 Reader.find()
@@ -39,6 +24,8 @@ t3.start()
 t3.join()
 
 print('This is the end')
+
+
 
 
 
@@ -65,3 +52,19 @@ print('This is the end')
 # t1.join()
 #
 # t2.join()
+
+
+# import queue
+
+# que = queue.Queue
+# lock = threading.Lock()
+# def write(lock):
+#     lock.acquire()
+#     main_writer()
+#     find()
+#     lock.release()
+#
+# def read(lock):
+#     lock.acquire()
+#     find()
+#     lock.release()
