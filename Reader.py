@@ -18,32 +18,33 @@ class Reader:
 
     def find(self):
         self.students = self.read_from_file()
-        self.students.sort(key=lambda k: k['Searches'], reverse=True)
+
         for student in self.students:
-            if student['Name'] == search:
+            if student['Name'] == self.search:
                 count = student['Searches']
                 self.students.remove(student)
                 # contain = True
-                update_item = { "Name": search,"Searches": count + 1}
+                update_item = { "Name": self.search,"Searches": count + 1}
                 self.students.append(update_item)
                 # print('search update: ',student)
                 print('Current size of file: ',len(self.students))
+                self.students.sort(key=lambda k: k['Searches'], reverse=True)
                 # print('updated list of self.students', self.students)
                 break
         else:
             new = input('does not exist, enter yes or no ?')
-            if new == 'yes':
-                student['Name'] = input('enter new name : ')
-                student['Searches'] = 0
-                self.students.remove(student)
-                self.students.append(student)
+            # if new == 'yes':
+            #     student['Name'] = input('enter new name : ')
+            #     student['Searches'] = 0
+            #     self.students.remove(student)
+            #     self.students.append(student)
 
         self.write_to_file()
 
-
-search = input('enter your search')
-stud = Reader(search)
-stud.find()
+def call_reader():
+    search = input('enter your search')
+    stud = Reader(search)
+    stud.find()
 
 
 
