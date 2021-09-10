@@ -7,15 +7,24 @@ import Reader
 
 
 
-while True:
-    t1 = threading.Thread(target=Writer.call_writer)
-    t1.start()
-    t1.join()
+size = int(input('what is size?'))
+writer1 = Writer.Writer("instance writer1",size)
 
-    t2 = threading.Thread(target=Reader.call_reader)
-    t2.start()
-    t2.join()
 
+#search = input('enter your search')
+read1 = Reader.Reader()
+
+print("starting thread1")
+t1 = threading.Thread(target=writer1.main)
+t1.start()
+print("thread1 started")
+
+print("Starting thread2")
+t2 = threading.Thread(target=read1.find)
+t2.start()
+
+t1.join()
+t2.join()
 
 
 
