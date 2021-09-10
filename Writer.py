@@ -22,7 +22,7 @@ class Writer:
         while True:
             input_name = input('enter name: ')
             self.students = self.read_from_file()
-            if len(self.students) < self.size:
+            if len(self.students) <= self.size:
                 student = {'Name': input_name, 'Searches': int()}
                 self.students.append(student)
                 self.write_to_file(self.students)
@@ -44,33 +44,20 @@ class Writer:
                     self.write_to_file(self.students)
                     break
 
-# while True:
-# size = int(input('what is size?'))
-# writer1 = Writer("instance writer1",size)
-# writer1.main()
+
+
+if __name__ == '__main__':
+    while True:
+        size = int(input('what is size?'))
+        writer1 = Writer("instance writer1",size)
+        writer1.main()
 
 
 
 
 
 
-# with open('students.json') as f:
-#     students = json.load(f)
-# #students.sort(key=lambda k: k['Searches'])
-# print(students)
-# search = input('search : ')
-# for student in students:
-#     if student['Name'] != search:
-#         students.remove(student)
-#         update_item = {"Name": search, "Searches": 0}
-#         students.append(update_item)
-#         print(students)
-#         with open('students.json', 'w') as f:
-#             json.dump(students, f, indent=4)
-#         break
-#
-#
-# print('updated one :',students)
+
 
 
 

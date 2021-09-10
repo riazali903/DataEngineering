@@ -27,7 +27,6 @@ class Reader:
                     # contain = True
                     update_item = { "Name": search,"Searches": count + 1}
                     self.students.append(update_item)
-                    self.students.sort(key=lambda k: k['Searches'], reverse=True)
                     self.write_to_file()
                     break
             else:
@@ -35,9 +34,9 @@ class Reader:
 
 
 
-
-# stud = Reader()
-# stud.find()
+if __name__ == '__main__':
+    stud = Reader()
+    stud.find()
 
 
 

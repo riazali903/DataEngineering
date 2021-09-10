@@ -27,9 +27,6 @@ t1.join()
 t2.join()
 
 
-while True:
-    t1.
-
 
 
 
