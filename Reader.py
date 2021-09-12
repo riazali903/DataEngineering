@@ -8,8 +8,8 @@ class Reader:
 
     def read_from_file(self):
         with open('record.json') as f:
-            record = json.load(f)
-            return record
+             return json.load(f)
+
 
     def write_to_file(self):
         with open('record.json', 'w') as f:
