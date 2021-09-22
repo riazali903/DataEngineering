@@ -8,15 +8,15 @@ class Writer:
         self.size = size
         self.students = []
 
-    def write_to_file(self,obj):
+    def write_to_file(self):
         with open('record.json', 'w') as f:
-            json.dump(obj, f, indent=4)
+            json.dump(self.students, f, indent=4)
 
 
     def read_from_file(self):
         with open('record.json') as f:
-            students = json.load(f)
-            return students
+            return json.load(f)
+
 
     def main(self):
         while True:
@@ -25,7 +25,7 @@ class Writer:
             if len(self.students) <= self.size:
                 student = {'Name': input_name, 'Searches': int()}
                 self.students.append(student)
-                self.write_to_file(self.students)
+                self.write_to_file()
             else:
                 self.update(input_name)
 
@@ -41,16 +41,15 @@ class Writer:
                     self.students.remove(student)
                     add_item = {"Name": input_name, "Searches": 0}
                     self.students.append(add_item)
-                    self.write_to_file(self.students)
+                    self.write_to_file()
                     break
 
 
 
 if __name__ == '__main__':
-    while True:
-        size = int(input('what is size?'))
-        writer1 = Writer("instance writer1",size)
-        writer1.main()
+    size = int(input('what is size?'))
+    writer1 = Writer("instance writer1",size)
+    writer1.main()
 
 
 

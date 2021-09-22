@@ -1,73 +1,40 @@
 import json
-import threading
+from threading import Thread, Lock
 import time
-
+from forgotten_map import ForgottenMap
 import Writer
 import Reader
+import random
 
+lock = Lock()
 
-
-size = int(input('what is size?'))
-writer1 = Writer.Writer("instance writer1",size)
+write_time = 0
+read_time = 0
+size = 10
+fm1 = ForgottenMap("instance writer1",size)
 
 
 #search = input('enter your search')
 read1 = Reader.Reader()
 
-print("starting thread1")
-t1 = threading.Thread(target=writer1.main)
-t1.start()
-print("thread1 started")
-
-print("Starting thread2")
-t2 = threading.Thread(target=read1.find)
-t2.start()
-
-t1.join()
-t2.join()
-
-
-
-
-
-
-
-
-
-
-
-
-#a = []
-
-# def wr():
-#     a.append(2)
-#
-#
-# def rd():
-#     print(a)
-#
-# t1 = threading.Thread(target=wr)
-# t1.start()
-#
-#
-# t2 = threading.Thread(target=rd)
-# t2.start()
-# t1.join()
-#
-# t2.join()
-
-
-# import queue
-
-# que = queue.Queue
-# lock = threading.Lock()
-# def write(lock):
+# def write():
 #     lock.acquire()
-#     main_writer()
-#     find()
+#     ForgottenMap.write_to_file()
 #     lock.release()
-#
-# def read(lock):
-#     lock.acquire()
-#     find()
-#     lock.release()
+
+
+for n in range(0,50):
+    print(f'Iteration {n}')
+
+    t1 = Thread(target=fm1.write, args=[f'name_{n}', write_time])
+    t1.start()
+    t1.join()
+    #time.sleep(0.1)
+    #read a random item ranging within 0 to n
+    t2 = Thread(target=fm1.find, args=[f'name_{random.randint(0,n)}', read_time])
+    t2.start()
+
+
+    t2.join()
+
+
