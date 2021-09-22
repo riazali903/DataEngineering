@@ -57,33 +57,32 @@ class ForgottenMap:
 
     def find(self,search, delay_time):
         print(f'trying to read {search}...')
-        #if self.lock.locked() is False:
-        with self.lock:
-            print(f'Reading {search}...')
-            time.sleep(delay_time)
-            #search = input('find student: ')
-            self.students = self.read_from_file()
-            for student in self.students:
-                if student['Name'] == search:
-                    print(f'{search} exists. Total items {len(self.students)}')
-                    count = student['Searches']
+        if self.lock.locked() is False:
+            with self.lock:
+                print(f'Reading {search}...')
+                time.sleep(delay_time)
+                #search = input('find student: ')
+                self.students = self.read_from_file()
+                for student in self.students:
+                    if student['Name'] == search:
+                        print(f'{search} exists. Total items {len(self.students)}')
+                        count = student['Searches']
+                        self.students.remove(student)
+                        # contain = True
+                        update_item = { "Name": search,"Searches": count + 1}
+                        self.students.append(update_item)
+                        self.write_to_file()
+                        break
+                else:
+                    print(f'Name {search} does not exist')
                     self.students.remove(student)
-                    # contain = True
-                    update_item = { "Name": search,"Searches": count + 1}
-                    self.students.append(update_item)
+                    add_item = {"Name": search, "Searches": 1}
+                    self.students.append(add_item)
                     self.write_to_file()
-                    break
-            else:
-                print(f'Name {search} does not exist')
-                add_item = {"Name": search, "Searches": 1}
-                self.students.append(add_item)
-                self.write_to_file()
-                print(f'Replaced {student} with {search}...')
+                    print(f'Replaced {student} with {search}...')
 
-
-
-        #else:
-            #print(f'Cannot read {search}. lock engaged...')
+        else:
+            print(f'Cannot read {search}. lock engaged...')
             #self.find(search, delay_time)
 
 
